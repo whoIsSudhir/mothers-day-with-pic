@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="./libs/mindar/mindar-image-three.prod.js"></script>
+      <script src="./main.js" type="module"></script>
+      <style>
+         html, body {
+         position: relative;
+         margin: 0;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+         }
+         canvas {
+         width: 100%;
+         height: 100%;
+         }
+         #scanning-overlay {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         /* background: rgba(238, 238, 238, 0.7); */ /* Commented out as per your code */
+         color: #fff;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         font-family: Arial, sans-serif;
+         z-index: 15; /* Ensure it’s above canvas but below UI */
+         }
+         #scanning-overlay.hidden {
+         display: none;
+         }
+         #scanning-overlay p {
+         margin: 10px 0; /* Add spacing between text elements */
+         }
+         .scanner-container {
+         position: relative;
+         width: 250px; /* Matches image width */
+         height: auto;
+         margin: 20px 0; /* Space above and below the container */
+         }
+         #scanning-overlay img {
+         width: 250px;
+         opacity: 0.5;
+         height: auto;
+         display: block; /* Ensure it fills the container */
+         }
+         .scanner-box {
+         position: absolute;
+         top: -10px; /* Offset to extend beyond image */
+         left: -10px;
+         right: -10px;
+         bottom: -10px;
+         border: 2px dashed #fff; /* Dashed border for scanning effect */
+         animation: scan 2s infinite linear; /* Animation for scanning effect */
+         pointer-events: none; /* Ensure it doesn’t interfere with interactions */
+         }
+         @keyframes scan {
+         0% {
+         border-color: #fff;
+         transform: scale(1);
+         opacity: 1;
+         }
+         50% {
+         border-color: #ff69b4; /* Match your UI theme */
+         transform: scale(1.05);
+         opacity: 0.7;
+         }
+         100% {
+         border-color: #fff;
+         transform: scale(1);
+         opacity: 1;
+         }
+         }
+         /* New style for logo */
+         #logo {
+         position: absolute;
+         bottom: 12px; /* Adjust spacing from the bottom */
+         left: 50%;
+         transform: translateX(-50%);
+         z-index: 20; /* Ensure it's above everything */
+         }
+         #logo img {
+         width: 150px; /* Adjust the width as needed */
+         height: auto; /* Maintain aspect ratio */
+         max-width: 150px; /* Ensure it doesn't grow too large */
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Custom scanning overlay with an image and scanner box -->
+      <div id="scanning-overlay" class="hidden">
+         <p>Scanning...</p>
+         <div class="scanner-container">
+            <img src="./assets/ARCHIES-DEMO.png" alt="Scanning Indicator">
+            <div class="scanner-box"></div>
+         </div>
+         <p>Please align the camera with the target image.</p>
+      </div>
+      <!-- Logo at the bottom center -->
+      <div id="logo">
+         <img src="./enipp.png" alt="Logo">
+      </div>
+      <!-- The UI panel will be dynamically created by JavaScript -->
+   </body>
+</html>
